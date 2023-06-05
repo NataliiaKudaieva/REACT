@@ -28,29 +28,6 @@
     font-weight: 600;
     color: rgba(4, 4, 4, 0.527);
   }
-  &__btn {
-    position: absolute;
-    bottom: 40px;
-    display: inline-block;
-    padding: 16px 35px;
-    width: 150px;
-    font-size: 12px;
-    font-weight: 700;
-    outline: 0;
-    line-height: 1;
-    border-radius: 7px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: rgba(4, 4, 4, 0.527);
-    border: 2px solid rgba(96, 5, 84, 0.527);
-    transition: all 0.2s ease-in-out;
-  }
-
-  &__btn:hover {
-    transform: translateY(-5px);
-    background-color: rgba(96, 5, 84, 0.527);
-    color: #fff;
-  }
   &__message {
     width: 100px;
     display: inline-block;
@@ -82,4 +59,27 @@ input:last-child {
 
 input:focus {
   border-bottom: rgba(96, 5, 84, 0.527) 2px solid;
+}
+
+#form__btn {
+  cursor: pointer;
+  position: absolute;
+  bottom: 40px;
+  display: inline-block;
+  padding: 16px 35px;
+  width: 150px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 7px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(4, 4, 4, 0.527);
+  border: 2px solid rgba(96, 5, 84, 0.527);
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: translateY(-5px);
+    background-color: rgba(96, 5, 84, 0.527);
+    color: #fff;
+  }
 }

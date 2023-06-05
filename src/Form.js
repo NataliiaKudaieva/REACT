@@ -4,53 +4,68 @@ import "./Form.scss";
 
 const Form = (props) => {
   const [values, setEnteredValues] = useState([]);
-  const [warning, setWarning] = useState("");
-  let [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(true);
+  const [validated, setValidated] = useState("");
 
   const inputs = ["name", "lastname", "email", "password"];
 
-  const inputsList = inputs.map((name) => (
+  const warnings = [
+    "must contain at least 2 letters and no digits",
+    "must contain at least 2 letters and no digits",
+    "must contain @ and .",
+    "must containr min 6 max 10, 1 upppercase letter and 1 digit",
+  ];
+
+  const inputsList = inputs.map((name, index) => (
     <label className="form__label" htmlFor={name}>
       {name}
       <input
         type="text"
         key={name}
         id={name}
+        value={values[index]}
         onChange={(e) =>
-          setEnteredValues((datas) => ({
-            ...datas,
-            [name]: e.target.value,
-          }))
+          setEnteredValues(
+            (datas) => ({
+              ...datas,
+              [name]: e.target.value,
+            }),
+            checkFields(values)
+          )
         }
       />
-      <span className="form__message">{warning}</span>
+      <span className="form__message" key={name}>
+        {validated || warnings[index]}
+      </span>
     </label>
   ));
 
   const checkFields = (values) => {
-    validationScheme(Object.entries(values));
-
     let enteredData = validationScheme(Object.entries(values));
 
-    if (Object.keys(enteredData).length === 0) return;
-    let validated = enteredData.every((value) => value[1] === true);
-    setDisabled(validated);
+    if (
+      enteredData.length === inputs.length &&
+      enteredData.every((value) => value[1] === true)
+    ) {
+      setDisabled(false);
+      setValidated("Approved!");
+    }
   };
-
-  checkFields(values);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    props.onSubmit(Object.entries(values));
+    props.onSubmit(values);
   };
 
   return (
-    <form className="form" autoComplete="off" onSubmit={submitHandler}>
-      <div className="form__container">{inputsList}</div>
-      <button disabled={disabled} type="submit" className="form__btn">
-        Submit
-      </button>
-    </form>
+    <div>
+      <form className="form" autoComplete="off" onSubmit={submitHandler}>
+        <div className="form__container">{inputsList}</div>
+        <button disabled={disabled} type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
   );
 };
 

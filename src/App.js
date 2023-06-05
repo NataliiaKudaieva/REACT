@@ -1,21 +1,18 @@
 import Form from "./Form";
 import "./App.css";
-import validationScheme from "./Validate";
-import Button from "./Button";
 
 function App() {
-  const getData = (data) => {
-    console.log(data);
-  };
-
-  const checked = (c) => {
-    console.log("df");
+  const isValid = (values) => {
+    alert("Form is valid!");
+    // Object.values(values).forEach((value, index) => {
+    //   if (value.length === 0) return;
+    //   delete value[index];
+    // });
   };
 
   return (
     <div className="wrapper">
-      <Form onSubmit={getData} onCheckHandler={checked} />
-      <Button />
+      <Form onSubmit={isValid} />
     </div>
   );
 }
